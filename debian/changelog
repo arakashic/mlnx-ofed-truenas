@@ -1,0 +1,5 @@
+mlnx-driver (24.10-2.1.8.0) unstable; urgency=medium
+
+  * Initial commit for mlnx-ofed package building
+
+ -- Yanfei Guo <yanf.guo@gmail.com>  Sun, 27 Apr 2025 10:51:17 -0600

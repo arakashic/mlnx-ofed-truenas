@@ -1,0 +1,15 @@
+Source: mlnx-driver
+Section: kernel
+Priority: optional
+Maintainer: Yanfei Guo <yanf.guo@gmail.com>
+Build-Depends:, debhelper-compat (= 12), linux-image-truenas-production-amd64, linux-headers-truenas-production-amd64, linux-source, libfuse-dev, quilt, libtool, dh-python, gcc, sudo, dh-dkms, python3, cmake, pandoc, flex, lsb-base, libselinux1-dev, lsof, ethtool, python3-docutils, libusb-1.0-0-dev, make, bison, libnl-3-dev, libnl-route-3-dev, valgrind, autoconf, libudev-dev, libstdc++6, devscripts, fakeroot, dh-autoreconf, pkg-config, libelf-dev, debhelper, libmnl-dev, pciutils, libnuma-dev, libdb-dev, cython3, chrpath, libsystemd-dev, libpci-dev, bzip2, python3-dev, autotools-dev
+Standards-Version: 4.4.0
+Homepage: https://network.nvidia.com/products/infiniband-drivers/linux/mlnx_ofed
+
+Package: mlnx-driver
+Depends: python3,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Architecture: amd64
+Description: Mellanox OFED
+ Mellanox Infiniband drivers

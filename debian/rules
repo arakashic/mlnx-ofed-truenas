@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+export DH_VERBOSE = 1
+
+ifndef KVERS
+KVERS=$(apt info linux-headers-truenas-production-amd64 | awk '/Source:/ { print $2 }' | sed 's/linux-//')
+endif
+
+ifndef KSRC
+KSRC=/lib/modules/$(KVERS)/build
+endif
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+
+override_dh_auto_build:
+	./install.pl --force --without-dkms --kernel $(KVERS) --kernel-sources $(KSRC) --fwctl --all --without-openmpi --without-sharp --without-hcoll
+	./install.pl --force --without-dkms --kernel $(KVERS) --kernel-sources $(KSRC) --fwctl --kernel-only --with-mlnx-nfsrdma --build-only || true
+
+override_dh_strip:
+
+
+override_dh_install:
+	cp DEBS/*/x86_64/*.deb debian/mlnx-driver/opt/mlnx-driver/DEBS
+	rm debian/mlnx-driver/opt/mlnx-driver/DEBS/*dbgsym*.deb
+
+override_dh_installdeb:
+	chmod +x debian/postinst
+	dh_installdeb
+
+override_dh_auto_test:
+	echo "Skip dh_auto_test"
+
